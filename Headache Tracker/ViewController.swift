@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
+    var container: NSPersistentContainer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

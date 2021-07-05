@@ -7,6 +7,11 @@
 
 import UIKit
 
-class user: NSObject {
-
+struct User {
+    var userName: String
+    var password: String
+    var gender: String
+    var age: String
+    var height: String
+    var weight: String
 }
