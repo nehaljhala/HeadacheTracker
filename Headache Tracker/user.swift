@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
-struct User {
-    var userName: String
-    var password: String
-    var gender: String
-    var age: String
-    var height: String
-    var weight: String
-}
+import CoreData
+//
+//struct User {
+//    var userName: String
+//    var password: String
+//    var gender: String
+//    var age: Int
+//    var height: Int
+//    var weight: Int
+//}

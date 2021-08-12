@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C911C2602691217F00692104 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C911C25E2691217F00692104 /* Model.xcdatamodeld */; };
-		C9432260268F8AE600F7686B /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C943225F268F8AE600F7686B /* ErrorViewController.swift */; };
 		C9645F952687983E0090D775 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F942687983E0090D775 /* LoginViewController.swift */; };
 		C9645F97268798720090D775 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F96268798720090D775 /* SignUpViewController.swift */; };
 		C9645F99268798960090D775 /* HeadacheTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */; };
 		C9645FA12687A1550090D775 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA02687A1550090D775 /* TableViewController.swift */; };
 		C9645FA32687B40B0090D775 /* HTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA22687B40B0090D775 /* HTCell.swift */; };
 		C9645FA52687CCD90090D775 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA42687CCD90090D775 /* user.swift */; };
+		C9821A5026A8F4DC001AD9BD /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */; };
 		C9CCFA852681051400BAF8B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA842681051400BAF8B6 /* AppDelegate.swift */; };
 		C9CCFA872681051400BAF8B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */; };
 		C9CCFA892681051400BAF8B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA882681051400BAF8B6 /* ViewController.swift */; };
@@ -25,13 +25,13 @@
 
 /* Begin PBXFileReference section */
 		C911C25F2691217F00692104 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		C943225F268F8AE600F7686B /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		C9645F942687983E0090D775 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C9645F96268798720090D775 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadacheTrackerViewController.swift; sourceTree = "<group>"; };
 		C9645FA02687A1550090D775 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		C9645FA22687B40B0090D775 /* HTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTCell.swift; sourceTree = "<group>"; };
 		C9645FA42687CCD90090D775 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		C9CCFA812681051400BAF8B6 /* Headache Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Headache Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CCFA842681051400BAF8B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,12 +76,12 @@
 				C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */,
 				C9CCFA842681051400BAF8B6 /* AppDelegate.swift */,
 				C9645FA42687CCD90090D775 /* user.swift */,
-				C943225F268F8AE600F7686B /* ErrorViewController.swift */,
 				C9645F942687983E0090D775 /* LoginViewController.swift */,
 				C9645F96268798720090D775 /* SignUpViewController.swift */,
 				C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */,
 				C9645FA02687A1550090D775 /* TableViewController.swift */,
 				C9645FA22687B40B0090D775 /* HTCell.swift */,
+				C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */,
 				C9CCFA882681051400BAF8B6 /* ViewController.swift */,
 				C9CCFA8A2681051400BAF8B6 /* Main.storyboard */,
 				C9CCFA8D2681051C00BAF8B6 /* Assets.xcassets */,
@@ -164,11 +164,11 @@
 				C9645F99268798960090D775 /* HeadacheTrackerViewController.swift in Sources */,
 				C9645FA12687A1550090D775 /* TableViewController.swift in Sources */,
 				C9645F952687983E0090D775 /* LoginViewController.swift in Sources */,
+				C9821A5026A8F4DC001AD9BD /* DetailsViewController.swift in Sources */,
 				C9645FA32687B40B0090D775 /* HTCell.swift in Sources */,
 				C9CCFA892681051400BAF8B6 /* ViewController.swift in Sources */,
 				C9645FA52687CCD90090D775 /* user.swift in Sources */,
 				C9CCFA852681051400BAF8B6 /* AppDelegate.swift in Sources */,
-				C9432260268F8AE600F7686B /* ErrorViewController.swift in Sources */,
 				C9645F97268798720090D775 /* SignUpViewController.swift in Sources */,
 				C911C2602691217F00692104 /* Model.xcdatamodeld in Sources */,
 				C9CCFA872681051400BAF8B6 /* SceneDelegate.swift in Sources */,

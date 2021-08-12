@@ -6,32 +6,26 @@
 //
 
 import UIKit
+import CoreData
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    var users: [User]{
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        return appDelegate.users
-    }
-    
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameTF.text = ""
-        passwordTF.text = ""
+        //        userNameTF.text = ""
+        //        passwordTF.text = ""
         
     }
     
     //keyboard settings:
     override func viewWillAppear(_ animated: Bool) {
         subscribeToKeyboardNotifications()
-        print("login view will appear")
+        //print("login view will appear")
     }
     
     func subscribeToKeyboardNotifications() {
@@ -41,6 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillShow(_ notification:Notification) {
     }
+    
     @objc func keyboardWillHide(_notification:Notification) {
     }
     
@@ -54,37 +49,50 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //login:
     @IBAction func loginButtonTapped(_ sender: Any){
-        print(userNameTF.text ?? String())
-        print(passwordTF.text ?? String())
         userNameTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
-        
-        for member in users{
-            print("starting to loop")
-            if userNameTF.text == member.userName && passwordTF.text == member.password{
-                print("conditions match")
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                
-                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "headacheTracker") as! HeadacheTrackerViewController
-                self.present(nextViewController, animated:true, completion:nil)
-                print("running after opening view controller")
-                return
+        var loginSuccessful = Bool()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate //Singlton instance
+        var context:NSManagedObjectContext!
+        context = appDelegate.persistentContainer.viewContext
+        var _: NSError? = nil
+        let predicate = NSPredicate(format: "userName = %@ and password = %@", userNameTF.text!, passwordTF.text!)
+        let fReq: NSFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        fReq.returnsObjectsAsFaults = false
+        fReq.predicate = predicate
+        do {
+            let result : [Any] = try context.fetch(fReq)
+            if result.count >= 1{
+                loginSuccessful = true
+                let object = UIApplication.shared.delegate as! AppDelegate
+                object.currentUser = userNameTF.text!
             }
+        } catch {
+        }
+        if loginSuccessful == true{
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+            
+            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "headacheTracker") as! HeadacheTrackerViewController
+            nextViewController.modalPresentationStyle = .fullScreen
+            self.present(nextViewController, animated:true, completion:nil)
+            return
         }
         
         //throw error:
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        
-        let nVC = storyBoard.instantiateViewController(withIdentifier: "showError") as! ErrorViewController
-        self.present(nVC, animated:true, completion:nil)
-        
+        if loginSuccessful == false{
+            let alert = UIAlertController(title:"Ooops", message: "Login Unsuccessful.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
-     
     
     @IBAction func signUpTapped(_ sender: Any) {
-        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated:true, completion:nil)
     }
-    
-    
 }
 
