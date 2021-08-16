@@ -24,7 +24,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     var heightPickerView = UIPickerView()
     var genderPickerView = UIPickerView()
     
-    var genderData = ["Male", "Female", "Unspecify"]
+    var genderData = ["Male", "Female", "Non Binary", "Prefer Not to Say"]
     var ageData = ["15 - 25 years", "26 - 40 years", "41 - 60 years", "above 60"]
     var heightData = ["4.9","5.0","5.1", "5.2", "5.3", "5.4", "5.5", "5.6","5.7", "5.8", "5.9", "5.10", "5.11", "6.0", "6.1", "6.2","6.3","6.4","6.5","6.6"]
     
@@ -39,16 +39,32 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         genderTF.inputView = genderPickerView
         heightTF.inputView = heightPickerView
         ageTF.inputView = agePickerView
-        
-        
         genderPickerView.tag = 1
         heightPickerView.tag = 2
         agePickerView.tag = 3
+        
     }
     
+    //keyboard settings:
+    override func viewWillAppear(_ animated: Bool) {
+        subscribeToKeyboardNotifications()
+        //print("login view will appear")
+    }
     
-    //pickerview:
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification:Notification) {
+    }
+    
+    @objc func keyboardWillHide(_notification:Notification) {
+    }
+    
+    //pickerview settings:
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        
         return 1
     }
     
@@ -63,7 +79,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         default:
             return 1
         }
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -77,9 +92,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         default:
             return "Data not found."
         }
-        
-        
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         switch pickerView.tag{
         case 1:
@@ -96,55 +110,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         }
     }
     
-    //keyboard settings:
-    override func viewWillAppear(_ animated: Bool) {
-        subscribeToKeyboardNotifications()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
-    }
-    
-    func subscribeToKeyboardNotifications() {
-        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //stop listening to keyboard events:
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //    @objc func keyboardWillShow(_ notification:Notification) {
-    //        if ageTF.isFirstResponder  {
-    //            view.frame.origin.y = -300
-    //        }
-    //        if heightTF.isFirstResponder  {
-    //            view.frame.origin.y = -300
-    //        }
-    //    }
-    
-    //    @objc func keyboardWillHide(_notification:Notification) {
-    //        if ageTF.isFirstResponder  {
-    //            view.frame.origin.y = 0
-    //        }
-    //        if heightTF.isFirstResponder  {
-    //            view.frame.origin.y = 0
-    //        }
-    //    }
-    
-    
-    // For pressing return on the keyboard to dismiss keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
+    // For pressing return on the keyboard to dismiss keyboard:
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         userNameTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
-        // genderTF.resignFirstResponder()
         weightTF.resignFirstResponder()
-        // heightTF.resignFirstResponder()
-        //ageTF.resignFirstResponder()
         return true
     }
     
@@ -156,6 +126,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         heightTF.resignFirstResponder()
         ageTF.resignFirstResponder()
         
+        let weightInt = Int("\(weightTF.text!)")
+        if weightInt ?? 0 <= 100{
+            let alert = UIAlertController(title: "Alert", message: "Weight is too less.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
         
         if userNameTF.text != nil,
            passwordTF.text != nil,

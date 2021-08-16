@@ -23,7 +23,7 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
     struct Response2: Codable {
         var list: [AirPollutionList]
     }
-    
+
     struct AirPollutionList : Codable {
         var main : AirPollution
     }
@@ -39,7 +39,6 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
     @IBOutlet weak var tempAvgLabel: UILabel!
     @IBOutlet weak var humidityAvgLabel: UILabel!
     @IBOutlet weak var uviAvgLabel: UILabel!
-    @IBOutlet weak var aqiAvgLabel: UILabel!
     @IBOutlet weak var avgDurationLabel: UILabel!
     @IBOutlet weak var avgTimeLabel: UILabel!
     @IBOutlet weak var windSpeedAvgLabel: UILabel!
@@ -55,7 +54,6 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
     var tempAvg = Float()
     var windSpeedAvg = Float()
     var uviAvg = Float()
-    var aqiAvg = Float()
     var timeAvg = String()
     var avgDuration = Int()
     
@@ -72,13 +70,48 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
             startStopLabel.text = "STOP"
         }
         doAnalysis()
-        tempAvgLabel.text = "\(tempAvg) \nTemp \n(F)"
+        
+        tempAvgLabel.text = "\(tempAvg) \nTemp(F)"
         humidityAvgLabel.text = "\(humidityAvg) \nHumidity"
         uviAvgLabel.text = "\(uviAvg) \nUVI"
-        windSpeedAvgLabel.text = "\(windSpeedAvg) \nWind \n(MPH) "
-        aqiAvgLabel.text = "\(aqiAvg) \nAQI"
-        avgTimeLabel.text = "\(timeAvg) \nTime"
-        avgDurationLabel.text = "\(avgDuration) \nDuration \n(Mins)"
+        windSpeedAvgLabel.text = "\(windSpeedAvg) \nWind(MPH)"
+        avgDurationLabel.text = "\(avgDuration) \nDuration\n(Mins)"
+        avgTimeLabel.text = "Your Headache mostly occurs at \n\(timeAvg)"
+        
+        let tempString:NSString = "\(tempAvgLabel.text!)" as NSString
+        var tempMutableString = NSMutableAttributedString()
+        let humidityString:NSString = "\(humidityAvgLabel.text!)" as NSString
+        var humidityMutableString = NSMutableAttributedString()
+        let windSpeedString:NSString = "\(windSpeedAvgLabel.text!)" as NSString
+        var windSpeedMutableString = NSMutableAttributedString()
+        let uviString:NSString = "\(uviAvgLabel.text!)" as NSString
+        var uviMutableString = NSMutableAttributedString()
+        let durationString:NSString = "\(avgDurationLabel.text!)" as NSString
+        var durationMutableString = NSMutableAttributedString()
+        let timeString:NSString = "\(avgTimeLabel.text!)" as NSString
+        var timeMutableString = NSMutableAttributedString()
+        
+        tempMutableString = NSMutableAttributedString(string: tempString as String)
+        tempMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        humidityMutableString = NSMutableAttributedString(string: humidityString as String)
+        humidityMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        windSpeedMutableString = NSMutableAttributedString(string: windSpeedString as String)
+        windSpeedMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        uviMutableString = NSMutableAttributedString(string:uviString as String)
+        uviMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        durationMutableString = NSMutableAttributedString(string: durationString as String)
+        durationMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 3))
+        timeMutableString = NSMutableAttributedString(string: timeString as String)
+        timeMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),NSAttributedString.Key.foregroundColor: UIColor.systemGray5],range: NSMakeRange(0, 30))
+        
+        // set label Attribute
+        tempAvgLabel.attributedText = tempMutableString
+        humidityAvgLabel.attributedText = humidityMutableString
+        windSpeedAvgLabel.attributedText = windSpeedMutableString
+        uviAvgLabel.attributedText = uviMutableString
+        avgDurationLabel.attributedText = durationMutableString
+        avgTimeLabel.attributedText = timeMutableString
+        
         
     }
     
@@ -282,7 +315,6 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
             var tempVar : Float = 0.0
             var windSpVar : Float = 0.0
             var uviVar : Float = 0.0
-            var aqiVar : Float = 0.0
             var timeResult = [0,0,0]
             var durationVar = 0
             
@@ -290,9 +322,8 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                 humidityAvg = 0
                 tempAvg = 0
                 uviAvg = 0
-                aqiAvg = 0
                 windSpeedAvg = 0
-                timeAvg = ""
+                timeAvg = "None Yet"
                 avgDuration = 0
             }
             else {
@@ -301,13 +332,12 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                     let humidityFloat = headacheDataTable[i].value(forKey: "humidity")as! Float
                     humiVar += humidityFloat
                     let tempFloat = headacheDataTable[i].value(forKey: "temp")as! Float
-                    tempVar += tempFloat
+                    let tempFahr = ((tempFloat - 273.15) * 9/5 + 32).rounded()
+                    tempVar += tempFahr
                     let windSpeedFloat = headacheDataTable[i].value(forKey: "windSpeed")as! Float
                     windSpVar += windSpeedFloat
                     let uviFloat = headacheDataTable[i].value(forKey: "uvi")as! Float
                     uviVar += uviFloat
-                    let aqiFloat = headacheDataTable[i].value(forKey: "aqi")as! Float
-                    aqiVar += aqiFloat
                     
                     //average time:
                     let startTimeDate = headacheDataTable[i].value(forKey: "startTime")
@@ -330,6 +360,7 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                             timeResult[2] += 1
                         }
                     }
+                    
                     //calculate duration of headache:
                     var duration = Int()
                     let headacheEndDate = headacheDataTable[i].value(forKey: "endTime")
@@ -338,13 +369,13 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                         df.dateFormat = "MM/dd/YY  HH:MM"
                         let newDateMinutes = (headacheEndDate! as AnyObject).timeIntervalSinceReferenceDate/60
                         let oldDateMinutes = (startTimeDate! as AnyObject).timeIntervalSinceReferenceDate/60
-                        let timeDifference = ( Double(newDateMinutes - oldDateMinutes))/60 //in minutes
+                        let timeDifference = ( Double(newDateMinutes - oldDateMinutes)) //in minutes
                         duration = Int(timeDifference.rounded())
                         durationVar += duration
                         print(duration)
                     }
                 }
-                
+                //weather avg:
                 humidityAvg = humiVar / Float(headacheDataTable.count)
                 humidityAvg = humidityAvg.rounded()
                 tempAvg = tempVar / Float(headacheDataTable.count)
@@ -353,9 +384,8 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                 windSpeedAvg = windSpeedAvg.rounded()
                 uviAvg = uviVar / Float(headacheDataTable.count)
                 uviAvg = uviAvg.rounded()
-                aqiAvg = aqiVar / Float(headacheDataTable.count)
-                aqiAvg = aqiAvg.rounded()
-        
+ 
+                //time avg:
                 let maxTime = timeResult.max()
                 if timeResult[0] == maxTime{
                     timeAvg = "Morning"
@@ -369,6 +399,7 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                 avgDuration = (durationVar / headacheDataTable.count)
                 print(avgDuration)
             }
+            
         } catch {
         }
     }

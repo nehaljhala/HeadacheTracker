@@ -17,8 +17,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        userNameTF.text = ""
-        //        passwordTF.text = ""
         
     }
     

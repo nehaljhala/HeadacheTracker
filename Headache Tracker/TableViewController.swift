@@ -14,7 +14,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     var tableDetails: [NSManagedObject] = []
     var headacheStartDateString = String()
     var duration = Int()
-    
+    var durationArr = [Int]()
     @IBOutlet weak var tableView: UITableView!
     
     //tableview :
@@ -44,6 +44,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             let oldDateMinutes = headacheStartDate!.timeIntervalSinceReferenceDate/60
             let timeDifference = ( Double(newDateMinutes - oldDateMinutes))
             duration = Int(timeDifference.rounded())
+            durationArr.append(duration)
         }
         // cell.duration.text = "\(duration) mins"
         cell.startTime.text = "\(headacheStartDateString)"
@@ -64,11 +65,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         nextViewController.modalPresentationStyle = .fullScreen
         nextViewController.temp = rowHeadache.value(forKey: "temp") as! Float
         nextViewController.humidity = rowHeadache.value(forKey: "humidity") as! Float
-        nextViewController.aqi = rowHeadache.value(forKey: "aqi") as! Float
         nextViewController.uvi = rowHeadache.value(forKey: "uvi") as! Float
         nextViewController.windSpeed = rowHeadache.value(forKey: "windSpeed") as! Float
         nextViewController.startTimeDate = rowHeadache.value(forKey: "startTime") as!Date
-        nextViewController.endTimeDate = rowHeadache.value(forKey: "endTime") as! Date
+        nextViewController.endTimeDate = rowHeadache.value(forKey: "endTime") as? Date
         nextViewController.lat = rowHeadache.value(forKey: "lat") as! Double
         nextViewController.lon = rowHeadache.value(forKey: "lon") as! Double
         self.present(nextViewController, animated:true, completion:nil)

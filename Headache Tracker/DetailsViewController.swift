@@ -20,21 +20,19 @@ class DetailsViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     var lat = Double()
     var temp = Float ()
     var humidity = Float ()
-    var aqi = Float ()
     var uvi = Float ()
     var windSpeed = Float ()
     var startTimeDate = Date()
-    var endTimeDate = Date()
+    var endTimeDate:Date?
     var duration = Int()
+    var tempFahr = Float()
     
     @IBOutlet weak var tempLabel1: UILabel!
     @IBOutlet weak var humiLabel1: UILabel!
-    @IBOutlet weak var aqiLabel1: UILabel!
     @IBOutlet weak var uviLabel1: UILabel!
     @IBOutlet weak var windSpeedLabel1: UILabel!
     @IBOutlet weak var tempLabel2: UILabel!
     @IBOutlet weak var humiLabel2: UILabel!
-    @IBOutlet weak var aqiLabel2: UILabel!
     @IBOutlet weak var uviLabel2: UILabel!
     @IBOutlet weak var windSpeedLabel2: UILabel!
     @IBOutlet weak var durationLabel1: UILabel!
@@ -46,13 +44,11 @@ class DetailsViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         super.viewDidLoad()
         getDuration()
         tempLabel1.text = "Temperature"
-        tempLabel2.text = "\(temp) Kelvin"
-        
+        tempFahr = ((temp - 273.15) * 9/5 + 32).rounded()
+        tempLabel2.text = "\(tempFahr) F"
+         print(temp)
         humiLabel1.text = "Humidity"
         humiLabel2.text = "\(humidity)"
-        
-        aqiLabel1.text = "AQI"
-        aqiLabel2.text = "\(aqi)"
         
         uviLabel1.text = "UVI"
         uviLabel2.text = "\(uvi)"
@@ -81,19 +77,20 @@ class DetailsViewController: UIViewController, MKMapViewDelegate, CLLocationMana
             let df = DateFormatter()
             df.dateFormat = "MM/dd/YY HH:MM"
         }
-        
-        let headacheEndDate = endTimeDate as Date?
-        if (headacheEndDate != nil ) {
+
+        if endTimeDate == nil{
+            duration = 0
+        }
+        else {
             let df = DateFormatter()
             df.dateFormat = "MM/dd/YY  HH:MM"
-        
+
             //calculate duration of headache:
-            let newDateMinutes = endTimeDate.timeIntervalSinceReferenceDate/60
+            let newDateMinutes = endTimeDate!.timeIntervalSinceReferenceDate/60
             let oldDateMinutes = startTimeDate.timeIntervalSinceReferenceDate/60
-            let timeDifference = ( Double(newDateMinutes - oldDateMinutes))/60
+            let timeDifference = ( Double(newDateMinutes - oldDateMinutes))
             duration = Int(timeDifference.rounded()) //in minutes
             print(duration)
         }
     }
-    
 }
