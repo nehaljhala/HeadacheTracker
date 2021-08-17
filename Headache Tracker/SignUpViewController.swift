@@ -48,7 +48,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     //keyboard settings:
     override func viewWillAppear(_ animated: Bool) {
         subscribeToKeyboardNotifications()
-        //print("login view will appear")
     }
     
     func subscribeToKeyboardNotifications() {
