@@ -16,18 +16,18 @@
         </fetchedProperty>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="age" optional="YES" attributeType="String"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
-        <attribute name="height" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="height" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="userName" optional="YES" attributeType="String"/>
-        <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <fetchedProperty name="fetchedProperty" optional="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="User"/>
         </fetchedProperty>
     </entity>
     <elements>
+        <element name="HeadacheData" positionX="-63" positionY="36" width="128" height="200"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="140"/>
-        <element name="HeadacheData" positionX="-63" positionY="36" width="128" height="221"/>
     </elements>
 </model>

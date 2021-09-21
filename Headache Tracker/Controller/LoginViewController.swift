@@ -17,13 +17,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
-    //keyboard settings:
+    //Keyboard Settings:
     override func viewWillAppear(_ animated: Bool) {
         subscribeToKeyboardNotifications()
-        //print("login view will appear")
     }
     
     func subscribeToKeyboardNotifications() {
@@ -33,51 +31,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func keyboardWillShow(_ notification:Notification) {
     }
-    
     @objc func keyboardWillHide(_notification:Notification) {
     }
     
-    // For pressing return on the keyboard to dismiss keyboard:
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
+    // To dismiss Keyboard:
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         userNameTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
         return true
     }
     
-    //login:
+    //Login:
     @IBAction func loginButtonTapped(_ sender: Any){
         userNameTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
-        var loginSuccessful = Bool()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate //Singlton instance
-        var context:NSManagedObjectContext!
-        context = appDelegate.persistentContainer.viewContext
-        var _: NSError? = nil
-        let predicate = NSPredicate(format: "userName = %@ and password = %@", userNameTF.text!, passwordTF.text!)
-        let fReq: NSFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        fReq.returnsObjectsAsFaults = false
-        fReq.predicate = predicate
-        do {
-            let result : [Any] = try context.fetch(fReq)
-            if result.count >= 1{
-                loginSuccessful = true
-                let object = UIApplication.shared.delegate as! AppDelegate
-                object.currentUser = userNameTF.text!
-            }
-        } catch {
-        }
-        if loginSuccessful == true{
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
+        let hTPersistence = HTPerCont()
+        let loginIsSuccessful = hTPersistence.loginCall(userNameTF.text!, passwordTF.text!)
+        if loginIsSuccessful == true{
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)            
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "headacheTracker") as! HeadacheTrackerViewController
             nextViewController.modalPresentationStyle = .fullScreen
             self.present(nextViewController, animated:true, completion:nil)
             return
         }
-        
-        //throw error:
-        if loginSuccessful == false{
+        //Throw error:
+        if loginIsSuccessful == false{
             let alert = UIAlertController(title:"Ooops", message: "Login Unsuccessful.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
@@ -91,6 +69,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SignUp") as! SignUpViewController
         nextViewController.modalPresentationStyle = .fullScreen
         self.present(nextViewController, animated:true, completion:nil)
-    }
+    }    
 }
 

@@ -198,7 +198,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logOutButtonTapped:" destination="X86-gn-Xru" eventType="touchUpInside" id="4SV-TX-aEe"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="U3v-wZ-Euk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Factors impacting Headache" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kf-VV-6aF">
@@ -428,7 +427,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Headache History" id="zwJ-Oy-AO9">
-                                        <barButtonItem key="rightBarButtonItem" image="arrowshape.turn.up.backward" catalog="system" id="fTr-DQ-RFg">
+                                        <barButtonItem key="rightBarButtonItem" image="arrow.backward" catalog="system" id="fTr-DQ-RFg">
                                             <connections>
                                                 <segue destination="X86-gn-Xru" kind="presentation" modalPresentationStyle="fullScreen" id="fe0-pB-vJH"/>
                                             </connections>
@@ -925,11 +924,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fe0-pB-vJH"/>
+        <segue reference="P33-hB-TP7"/>
         <segue reference="PVu-h7-lNf"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="circlebadge.fill" catalog="system" width="128" height="120"/>
         <systemColor name="secondaryLabelColor">

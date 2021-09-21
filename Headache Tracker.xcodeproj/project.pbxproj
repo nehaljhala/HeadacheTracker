@@ -7,35 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C911C2602691217F00692104 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C911C25E2691217F00692104 /* Model.xcdatamodeld */; };
+		C9237DA626F678C400D70940 /* HTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9237DA526F678C400D70940 /* HTClient.swift */; };
+		C9237DA826F6794F00D70940 /* HTPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9237DA726F6794F00D70940 /* HTPersistence.swift */; };
+		C9237DAA26F8E96500D70940 /* HTStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9237DA926F8E96500D70940 /* HTStruct.swift */; };
+		C9237DAD26F9098300D70940 /* HTModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9237DAB26F9098300D70940 /* HTModel.xcdatamodeld */; };
 		C9645F952687983E0090D775 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F942687983E0090D775 /* LoginViewController.swift */; };
 		C9645F97268798720090D775 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F96268798720090D775 /* SignUpViewController.swift */; };
 		C9645F99268798960090D775 /* HeadacheTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */; };
 		C9645FA12687A1550090D775 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA02687A1550090D775 /* TableViewController.swift */; };
 		C9645FA32687B40B0090D775 /* HTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA22687B40B0090D775 /* HTCell.swift */; };
-		C9645FA52687CCD90090D775 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9645FA42687CCD90090D775 /* user.swift */; };
 		C9821A5026A8F4DC001AD9BD /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */; };
 		C9CCFA852681051400BAF8B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA842681051400BAF8B6 /* AppDelegate.swift */; };
 		C9CCFA872681051400BAF8B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */; };
-		C9CCFA892681051400BAF8B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCFA882681051400BAF8B6 /* ViewController.swift */; };
 		C9CCFA8C2681051400BAF8B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9CCFA8A2681051400BAF8B6 /* Main.storyboard */; };
 		C9CCFA8E2681051C00BAF8B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9CCFA8D2681051C00BAF8B6 /* Assets.xcassets */; };
 		C9CCFA912681051C00BAF8B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9CCFA8F2681051C00BAF8B6 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C911C25F2691217F00692104 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		C9237DA526F678C400D70940 /* HTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTClient.swift; sourceTree = "<group>"; };
+		C9237DA726F6794F00D70940 /* HTPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTPersistence.swift; sourceTree = "<group>"; };
+		C9237DA926F8E96500D70940 /* HTStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTStruct.swift; sourceTree = "<group>"; };
+		C9237DAC26F9098300D70940 /* HTModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HTModel.xcdatamodel; sourceTree = "<group>"; };
 		C9645F942687983E0090D775 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C9645F96268798720090D775 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadacheTrackerViewController.swift; sourceTree = "<group>"; };
 		C9645FA02687A1550090D775 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		C9645FA22687B40B0090D775 /* HTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTCell.swift; sourceTree = "<group>"; };
-		C9645FA42687CCD90090D775 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		C9CCFA812681051400BAF8B6 /* Headache Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Headache Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9CCFA842681051400BAF8B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C9CCFA882681051400BAF8B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9CCFA8B2681051400BAF8B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9CCFA8D2681051C00BAF8B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9CCFA902681051C00BAF8B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,10 +55,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C930841D26D41FAD002F26AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9CCFA8A2681051400BAF8B6 /* Main.storyboard */,
+				C9CCFA8D2681051C00BAF8B6 /* Assets.xcassets */,
+				C9CCFA8F2681051C00BAF8B6 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C930841E26D41FB9002F26AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */,
+				C9645FA22687B40B0090D775 /* HTCell.swift */,
+				C9237DA526F678C400D70940 /* HTClient.swift */,
+				C9237DA726F6794F00D70940 /* HTPersistence.swift */,
+				C9237DA926F8E96500D70940 /* HTStruct.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C930841F26D41FCA002F26AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C9CCFA842681051400BAF8B6 /* AppDelegate.swift */,
+				C9645F942687983E0090D775 /* LoginViewController.swift */,
+				C9645F96268798720090D775 /* SignUpViewController.swift */,
+				C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */,
+				C9645FA02687A1550090D775 /* TableViewController.swift */,
+				C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C9CCFA782681051400BAF8B6 = {
 			isa = PBXGroup;
 			children = (
-				C911C25E2691217F00692104 /* Model.xcdatamodeld */,
 				C9CCFA832681051400BAF8B6 /* Headache Tracker */,
 				C9CCFA822681051400BAF8B6 /* Products */,
 			);
@@ -73,20 +109,11 @@
 		C9CCFA832681051400BAF8B6 /* Headache Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				C9CCFA862681051400BAF8B6 /* SceneDelegate.swift */,
-				C9CCFA842681051400BAF8B6 /* AppDelegate.swift */,
-				C9645FA42687CCD90090D775 /* user.swift */,
-				C9645F942687983E0090D775 /* LoginViewController.swift */,
-				C9645F96268798720090D775 /* SignUpViewController.swift */,
-				C9645F98268798960090D775 /* HeadacheTrackerViewController.swift */,
-				C9645FA02687A1550090D775 /* TableViewController.swift */,
-				C9645FA22687B40B0090D775 /* HTCell.swift */,
-				C9821A4F26A8F4DC001AD9BD /* DetailsViewController.swift */,
-				C9CCFA882681051400BAF8B6 /* ViewController.swift */,
-				C9CCFA8A2681051400BAF8B6 /* Main.storyboard */,
-				C9CCFA8D2681051C00BAF8B6 /* Assets.xcassets */,
-				C9CCFA8F2681051C00BAF8B6 /* LaunchScreen.storyboard */,
+				C930841D26D41FAD002F26AF /* View */,
+				C930841E26D41FB9002F26AF /* Model */,
+				C930841F26D41FCA002F26AF /* Controller */,
 				C9CCFA922681051C00BAF8B6 /* Info.plist */,
+				C9237DAB26F9098300D70940 /* HTModel.xcdatamodeld */,
 			);
 			path = "Headache Tracker";
 			sourceTree = "<group>";
@@ -162,15 +189,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9645F99268798960090D775 /* HeadacheTrackerViewController.swift in Sources */,
+				C9237DA826F6794F00D70940 /* HTPersistence.swift in Sources */,
 				C9645FA12687A1550090D775 /* TableViewController.swift in Sources */,
+				C9237DAD26F9098300D70940 /* HTModel.xcdatamodeld in Sources */,
 				C9645F952687983E0090D775 /* LoginViewController.swift in Sources */,
 				C9821A5026A8F4DC001AD9BD /* DetailsViewController.swift in Sources */,
+				C9237DA626F678C400D70940 /* HTClient.swift in Sources */,
 				C9645FA32687B40B0090D775 /* HTCell.swift in Sources */,
-				C9CCFA892681051400BAF8B6 /* ViewController.swift in Sources */,
-				C9645FA52687CCD90090D775 /* user.swift in Sources */,
 				C9CCFA852681051400BAF8B6 /* AppDelegate.swift in Sources */,
+				C9237DAA26F8E96500D70940 /* HTStruct.swift in Sources */,
 				C9645F97268798720090D775 /* SignUpViewController.swift in Sources */,
-				C911C2602691217F00692104 /* Model.xcdatamodeld in Sources */,
 				C9CCFA872681051400BAF8B6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,13 +403,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C911C25E2691217F00692104 /* Model.xcdatamodeld */ = {
+		C9237DAB26F9098300D70940 /* HTModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C911C25F2691217F00692104 /* Model.xcdatamodel */,
+				C9237DAC26F9098300D70940 /* HTModel.xcdatamodel */,
 			);
-			currentVersion = C911C25F2691217F00692104 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = C9237DAC26F9098300D70940 /* HTModel.xcdatamodel */;
+			path = HTModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
