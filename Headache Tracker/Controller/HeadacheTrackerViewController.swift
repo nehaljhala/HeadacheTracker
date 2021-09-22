@@ -44,48 +44,9 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
         } else {
             startStopLabel.text = "STOP"
         }
-        
         doAnalysis()
-        tempAvgLabel.text = "\(tempAvg) \nTemp(F)"
-        humidityAvgLabel.text = "\(humidityAvg) \nHumidity"
-        uviAvgLabel.text = "\(uviAvg) \nUVI"
-        windSpeedAvgLabel.text = "\(windSpeedAvg) \nWind(MPH)"
-        avgDurationLabel.text = "\(avgDuration) \nDuration\n(Mins)"
-        avgTimeLabel.text = "Your Headache mostly occurs at \n\(timeAvg)"
-        
-        let tempString:NSString = "\(tempAvgLabel.text!)" as NSString
-        var tempMutableString = NSMutableAttributedString()
-        let humidityString:NSString = "\(humidityAvgLabel.text!)" as NSString
-        var humidityMutableString = NSMutableAttributedString()
-        let windSpeedString:NSString = "\(windSpeedAvgLabel.text!)" as NSString
-        var windSpeedMutableString = NSMutableAttributedString()
-        let uviString:NSString = "\(uviAvgLabel.text!)" as NSString
-        var uviMutableString = NSMutableAttributedString()
-        let durationString:NSString = "\(avgDurationLabel.text!)" as NSString
-        var durationMutableString = NSMutableAttributedString()
-        let timeString:NSString = "\(avgTimeLabel.text!)" as NSString
-        var timeMutableString = NSMutableAttributedString()
-        
-        tempMutableString = NSMutableAttributedString(string: tempString as String)
-        tempMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
-        humidityMutableString = NSMutableAttributedString(string: humidityString as String)
-        humidityMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
-        windSpeedMutableString = NSMutableAttributedString(string: windSpeedString as String)
-        windSpeedMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
-        uviMutableString = NSMutableAttributedString(string:uviString as String)
-        uviMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
-        durationMutableString = NSMutableAttributedString(string: durationString as String)
-        durationMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 3))
-        timeMutableString = NSMutableAttributedString(string: timeString as String)
-        timeMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),NSAttributedString.Key.foregroundColor: UIColor.systemGray5],range: NSMakeRange(0, 30))
-        
-        // Set Label Attribute:
-        tempAvgLabel.attributedText = tempMutableString
-        humidityAvgLabel.attributedText = humidityMutableString
-        windSpeedAvgLabel.attributedText = windSpeedMutableString
-        uviAvgLabel.attributedText = uviMutableString
-        avgDurationLabel.attributedText = durationMutableString
-        avgTimeLabel.attributedText = timeMutableString
+        updateDashboard()
+        setupLayout()
     }
     
     @IBAction func startStopButtonTapped(_ sender: Any) {
@@ -95,8 +56,19 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
         }
         else {
             let client = HTClient()
-            client.getJson(lat, lon) { [self] (json) in
-                self.persCont.saveWeatherData(weather: json, lat, lon)
+            client.getJson(lat, lon) { [self] (json,error,success)  in
+                if success == true{
+                    DispatchQueue.main.async {
+                        self.persCont.saveWeatherData(weather: json!, lat, lon)
+                        doAnalysis()
+                    }
+                }
+                else{
+                    let alert = UIAlertController(title:"Unexpected Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
             startStopLabel.text = "STOP"
         }
@@ -106,7 +78,7 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
         //Segue to tableView
     }
     @IBAction func logOutButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //Segue to LoginView
     }
     
     //Analytics:
@@ -206,9 +178,54 @@ class HeadacheTrackerViewController: UIViewController, CLLocationManagerDelegate
                 }
                 avgDuration = (durationVar / headacheDataTable.count)
                 print(avgDuration)
+                updateDashboard()
+                setupLayout()
             }
         } catch {
         }
+    }
+    
+    func updateDashboard() {
+        tempAvgLabel.text = "\(tempAvg) \nTemp(F)"
+        humidityAvgLabel.text = "\(humidityAvg) \nHumidity"
+        uviAvgLabel.text = "\(uviAvg) \nUVI"
+        windSpeedAvgLabel.text = "\(windSpeedAvg) \nWind(MPH)"
+        avgDurationLabel.text = "\(avgDuration) \nDuration\n(Mins)"
+        avgTimeLabel.text = "Your Headache mostly occurs at \n\(timeAvg)"
+    }
+    
+    func setupLayout(){
+        let tempString:NSString = "\(tempAvgLabel.text!)" as NSString
+        var tempMutableString = NSMutableAttributedString()
+        let humidityString:NSString = "\(humidityAvgLabel.text!)" as NSString
+        var humidityMutableString = NSMutableAttributedString()
+        let windSpeedString:NSString = "\(windSpeedAvgLabel.text!)" as NSString
+        var windSpeedMutableString = NSMutableAttributedString()
+        let uviString:NSString = "\(uviAvgLabel.text!)" as NSString
+        var uviMutableString = NSMutableAttributedString()
+        let durationString:NSString = "\(avgDurationLabel.text!)" as NSString
+        var durationMutableString = NSMutableAttributedString()
+        let timeString:NSString = "\(avgTimeLabel.text!)" as NSString
+        var timeMutableString = NSMutableAttributedString()
+        
+        tempMutableString = NSMutableAttributedString(string: tempString as String)
+        tempMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        humidityMutableString = NSMutableAttributedString(string: humidityString as String)
+        humidityMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        windSpeedMutableString = NSMutableAttributedString(string: windSpeedString as String)
+        windSpeedMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        uviMutableString = NSMutableAttributedString(string:uviString as String)
+        uviMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 4))
+        durationMutableString = NSMutableAttributedString(string: durationString as String)
+        durationMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30),NSAttributedString.Key.foregroundColor: UIColor.systemRed],range: NSMakeRange(0, 3))
+        timeMutableString = NSMutableAttributedString(string: timeString as String)
+        timeMutableString.setAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15),NSAttributedString.Key.foregroundColor: UIColor.systemGray5],range: NSMakeRange(0, 30))
+        tempAvgLabel.attributedText = tempMutableString
+        humidityAvgLabel.attributedText = humidityMutableString
+        windSpeedAvgLabel.attributedText = windSpeedMutableString
+        uviAvgLabel.attributedText = uviMutableString
+        avgDurationLabel.attributedText = durationMutableString
+        avgTimeLabel.attributedText = timeMutableString
     }
     
     //Get Location:
